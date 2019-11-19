@@ -1,7 +1,16 @@
 <template>
   <div>
     <template v-for='(item,index) in newData'>
-      <drag-node :model='item' :allowDrag='allowDrag' :allowDrop='allowDrop' :depth='increaseDepth' :defaultText='defaultText' :disableDBClick='disableDBClick' :key='index' v-slot='slotProps'>
+      <drag-node
+        :model='item'
+        :allowDrag='allowDrag'
+        :allowDrop='allowDrop'
+        :depth='increaseDepth'
+        :defaultText='defaultText'
+        :disableDBClick='disableDBClick'
+        :key='index'
+        v-slot='slotProps'
+      >
         <slot :nodeName="slotProps.nodeName" :isClicked='slotProps.isClicked'></slot>
       </drag-node>
     </template>
@@ -48,12 +57,12 @@ export default {
       },
       // setter
       set(newValue) {
-        // 移除原属性内部所有的值，为了要一个“干净”的引用对象。
+        // Remove all values inside the original attribute in order to have a "clean" reference object.
         let length = this.data.length;
         for (let i = 0; i < length; i++) {
           this.data.shift(i);
         }
-        // 然后利用对象深拷贝（返回target的引用），因此控制台不会报错～
+        // Then use the object deep copy (return the reference of the target), so the console will not report an error~
         this.data = Object.assign(this.data, newValue);
       }
     }
@@ -86,4 +95,3 @@ export default {
   }
 };
 </script>
-

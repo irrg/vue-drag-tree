@@ -1,6 +1,6 @@
 <template>
   <div :style='styleObj' :draggable='isDraggable' @drag.stop='drag' @dragstart.stop='dragStart' @dragover.stop='dragOver' @dragenter.stop='dragEnter' @dragleave.stop='dragLeave' @drop.stop='drop' @dragend.stop='dragEnd' class='dnd-container'>
-    <div :class='{"is-clicked": isClicked,"is-hover":isHover}' @click="toggle" @mouseover='mouseOver' @mouseout='mouseOut' @dblclick="changeType">
+    <div :class='{"is-open": open, "is-clicked": isClicked,"is-hover":isHover}' @click="toggle" @mouseover='mouseOver' @mouseout='mouseOut' @dblclick="changeType">
       <div :style="{ 'padding-left': (this.depth - 1) * 24 + 'px' }" :id='model.id' class='treeNodeText'>
         <slot :nodeName="model.name" :isClicked='isClicked'>
           <span :class="[isClicked ? 'nodeClicked' : '','vue-drag-node-icon']"></span>
@@ -245,7 +245,10 @@ export default {
 }
 
 .nodeClicked {
+  /* transform: rotate(90deg); */
+}
+
+.is-open > .treeNodeText > .vue-drag-node-icon {
   transform: rotate(90deg);
 }
 </style>
-
